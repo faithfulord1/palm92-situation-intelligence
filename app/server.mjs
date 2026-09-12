@@ -13,9 +13,116 @@ const types = {
   '.json': 'application/json; charset=utf-8'
 };
 
-const server = http.createServer(async (req, res) => {
+const json = (res, status, body) => {
+  res.writeHead(status, {
+    'Content-Type': 'application/json; charset=utf-8',
+    'Cache-Control': 'no-store'
+  });
+  res.end(JSON.stringify(body));
+};
+
+async function fetchJson(url, options = {}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
   try {
-    const urlPath = req.url === '/' ? '/index.html' : req.url.split('?')[0];
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    if (!response.ok) throw new Error(`Upstream returned ${response.status}`);
+    return await response.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function api(req, res, path) {
+  if (path === '/api/health') {
+    return json(res, 200, { ok: true, service: 'Palm92 Situation Intelligence', time: new Date().toISOString() });
+  }
+
+  if (path === '/api/earthquakes') {
+    try {
+      const data = await fetchJson('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson');
+      const items = (data.features || []).slice(0, 40).map((f) => ({
+        id: f.id,
+        title: f.properties?.place || 'Unknown location',
+        magnitude: f.properties?.mag,
+        time: f.properties?.time,
+        updated: f.properties?.updated,
+        url: f.properties?.url,
+        coordinates: f.geometry?.coordinates || [],
+        source: 'USGS'
+      }));
+      return json(res, 200, { source: 'USGS', retrievedAt: new Date().toISOString(), count: items.length, items });
+    } catch (error) {
+      return json(res, 502, { error: 'Earthquake feed unavailable', detail: error.message });
+    }
+  }
+
+  if (path === '/api/tfl') {
+    try {
+      const data = await fetchJson('https://api.tfl.gov.uk/Line/Mode/tube,overground,dlr,elizabeth-line/Status');
+      const items = (data || []).map((line) => {
+        const status = line.lineStatuses?.[0];
+        return {
+          id: line.id,
+          name: line.name,
+          severity: status?.statusSeverity ?? null,
+          status: status?.statusSeverityDescription || 'Unknown',
+          reason: status?.reason || null,
+          source: 'TfL'
+        };
+      });
+      return json(res, 200, { source: 'Transport for London', retrievedAt: new Date().toISOString(), count: items.length, items });
+    } catch (error) {
+      return json(res, 502, { error: 'TfL feed unavailable', detail: error.message });
+    }
+  }
+
+  if (path === '/api/weather') {
+    try {
+      const data = await fetchJson('https://api.open-meteo.com/v1/forecast?latitude=51.5074&longitude=-0.1278&current=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,wind_gusts_10m&hourly=precipitation_probability&timezone=Europe%2FLondon&forecast_days=1');
+      return json(res, 200, {
+        source: 'Open-Meteo',
+        retrievedAt: new Date().toISOString(),
+        location: 'London',
+        current: data.current || {},
+        hourly: {
+          time: (data.hourly?.time || []).slice(0, 24),
+          precipitationProbability: (data.hourly?.precipitation_probability || []).slice(0, 24)
+        }
+      });
+    } catch (error) {
+      return json(res, 502, { error: 'Weather feed unavailable', detail: error.message });
+    }
+  }
+
+  if (path === '/api/fires') {
+    const mapKey = process.env.NASA_FIRMS_MAP_KEY;
+    if (!mapKey) {
+      return json(res, 200, {
+        source: 'NASA FIRMS',
+        configured: false,
+        message: 'Set NASA_FIRMS_MAP_KEY to enable live active-fire detections.'
+      });
+    }
+    return json(res, 501, {
+      source: 'NASA FIRMS',
+      configured: true,
+      message: 'FIRMS key detected. CSV parsing adapter is the next Phase 1 task.'
+    });
+  }
+
+  return json(res, 404, { error: 'API route not found' });
+}
+
+const server = http.createServer(async (req, res) => {
+  const path = (req.url || '/').split('?')[0];
+
+  if (path.startsWith('/api/')) {
+    return api(req, res, path);
+  }
+
+  try {
+    const urlPath = path === '/' ? '/index.html' : path;
     const safePath = normalize(urlPath).replace(/^([.][.][/\\])+/, '');
     const filePath = join(root, safePath);
     const data = await readFile(filePath);

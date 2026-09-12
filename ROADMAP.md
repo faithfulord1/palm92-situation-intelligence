@@ -1,18 +1,22 @@
 # Roadmap
 
-## Phase 0 — Foundation
+## Phase 0 — Foundation ✅
 - Repository structure
 - Governance docs
 - Pinokio launcher
 - Demo dashboard
-- Common incident schema
+- Common incident schema direction
 
-## Phase 1 — Live public data
-- Earthquake feed
-- Active fire feed
-- Weather alerts
-- UK rail / public transport disruption
-- Infrastructure map
+## Phase 1 — Live public data 🚧
+- [x] USGS earthquake feed
+- [x] TfL London transport status
+- [x] Open-Meteo London weather
+- [x] Provenance and freshness display
+- [x] Automatic two-minute refresh
+- [ ] NASA FIRMS active-fire parsing
+- [ ] Interactive geospatial map
+- [ ] Wider UK rail disruption
+- [ ] Infrastructure map
 
 ## Phase 2 — Incident intelligence
 - Correlation engine

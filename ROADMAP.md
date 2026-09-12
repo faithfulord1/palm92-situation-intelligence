@@ -1,62 +1,65 @@
 # Roadmap
 
-## Phase 0 — Foundation ✅
-- Repository structure
-- Governance docs
-- Pinokio launcher
-- Demo dashboard
+## v1.0 MVP ✅
 
-## Phase 1 — Live public data 🚧
-- [x] USGS earthquake feed
-- [x] TfL London transport status
-- [x] Open-Meteo London weather
-- [x] Provenance and freshness display
-- [x] Automatic two-minute refresh
-- [x] Interactive geospatial map
-- [x] Selectable live markers
+### Foundation
+- [x] Repository structure
+- [x] Governance and security docs
+- [x] Incident schema
+- [x] Pinokio launcher
+
+### Live data
+- [x] USGS earthquakes
+- [x] TfL line status
+- [x] Open-Meteo weather
+- [x] TfL infrastructure / StopPoint feed
+- [x] NASA FIRMS adapter
+- [x] Source provenance and freshness
+- [x] Two-minute refresh
+
+### Geospatial experience
+- [x] Interactive Leaflet / OpenStreetMap
 - [x] Layer toggles
-- [x] Intelligence side panel
-- [ ] NASA FIRMS active-fire parsing
-- [ ] Wider UK rail disruption
-- [ ] Infrastructure map
+- [x] Selectable markers
+- [x] Operational scenes
+- [x] London focus workflow
 
-## Phase 2 — Incident intelligence 🚧
-- [x] Deterministic correlation engine
-- [x] Incident object model
+### Incident intelligence
+- [x] Deterministic correlation
 - [x] Incident queue
-- [x] Evidence bundle
+- [x] Evidence bundles
 - [x] Confidence scoring
-- [x] Observed vs inferred labelling
+- [x] Observed vs inferred labels
 - [x] Impact Path
-- [x] Recommended next action
-- [x] Human-review / escalation preparation controls
-- [ ] Persistent audit storage
-- [ ] Conflicting-evidence detector
-- [ ] Affected infrastructure lookup
+- [x] Infrastructure dependency mapping
+- [x] Recommendations
+- [x] Human review gate
+- [x] Escalation preparation
+- [x] Incident JSON export
+- [x] Local audit trail
 
-## Phase 3 — AI copilot
-- Natural-language search
-- Voice commands
-- Incident brief generation
-- Explain-this-event mode
-- Recommended actions with approval gates
+### Copilot
+- [x] Natural-language command box
+- [x] Explain selected incident
+- [x] Highest-priority query
+- [x] Dependency query
+- [x] Weather query
+- [x] Map focus
+- [x] Browser voice input where supported
 
-## Phase 4 — Reconstruction
-- Historical incident playback
-- Media/evidence timeline
-- Geospatial reconstruction
-- Before/after comparison
+## v1.1 next
+- [ ] Durable database-backed audit trail
+- [ ] User authentication and roles
+- [ ] Wider UK rail feeds
+- [ ] Conflict-detection engine
+- [ ] Historical replay
+- [ ] Scene sequence playback
+- [ ] PDF executive incident report
 
-## Phase 5 — Domain packs
-- RailGuard
-- Humanitarian response
-- Infrastructure resilience
-- Construction risk
-- SafeVoice integration
-
-## Phase 6 — Distribution
-- Hosted version
-- Pinokio one-click install
-- MCP server
-- Plugin architecture
-- Community contribution workflow
+## v2 future
+- [ ] RailGuard domain pack
+- [ ] Humanitarian response domain pack
+- [ ] Infrastructure resilience pack
+- [ ] SafeVoice integration
+- [ ] MCP server implementation
+- [ ] Hosted multi-user version

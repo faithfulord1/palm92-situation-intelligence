@@ -14,7 +14,7 @@
       <h1>Situation Intelligence</h1>
       <p>See the situation. Understand the risk. Keep humans in control.</p>
     </div>
-    <div class="status live">PHASE 1 LIVE MAP</div>
+    <div class="status live">PHASE 2 INCIDENT INTELLIGENCE</div>
   </header>
 
   <main>
@@ -22,7 +22,7 @@
       <div>
         <span class="kicker">LIVE OPERATIONAL PICTURE</span>
         <h2>London resilience overview</h2>
-        <p class="muted">Live public feeds now appear on an interactive geospatial layer. Click markers to inspect source, time, and context.</p>
+        <p class="muted">Live public feeds are now correlated into explainable incident objects with confidence, evidence bundles, impact paths, and human review gates.</p>
       </div>
       <div class="score">
         <span>Risk posture</span>
@@ -32,10 +32,10 @@
     </section>
 
     <section class="grid metrics">
-      <article class="card"><span>Earthquakes today</span><strong id="eqCount">...</strong><small id="eqFresh">USGS</small></article>
+      <article class="card"><span>Open incidents</span><strong id="incidentCount">...</strong><small id="incidentFresh">correlation engine</small></article>
       <article class="card"><span>Transport issues</span><strong id="tflCount">...</strong><small id="tflFresh">TfL</small></article>
       <article class="card"><span>London temperature</span><strong id="weatherTemp">...</strong><small id="weatherDetail">Open-Meteo</small></article>
-      <article class="card"><span>Fire layer</span><strong id="fireState">CHECK</strong><small id="fireDetail">NASA FIRMS</small></article>
+      <article class="card"><span>Earthquakes today</span><strong id="eqCount">...</strong><small id="eqFresh">USGS</small></article>
     </section>
 
     <section class="grid map-layout">
@@ -43,10 +43,10 @@
         <div class="section-title">
           <span>Operational map</span>
           <div class="map-actions">
+            <button class="chip active" data-layer="incidents">Incidents</button>
             <button class="chip active" data-layer="earthquakes">Earthquakes</button>
             <button class="chip active" data-layer="weather">Weather</button>
             <button class="chip active" data-layer="transport">Transport</button>
-            <button class="chip" data-layer="fires">Fires</button>
           </div>
         </div>
         <div id="map"></div>
@@ -58,10 +58,32 @@
 
       <aside class="card intel-panel">
         <div class="section-title"><span>Selected intelligence</span><span class="pill" id="selectedType">none</span></div>
-        <div id="selectedPanel" class="selected-empty">
-          Select an event or operational marker on the map.
-        </div>
+        <div id="selectedPanel" class="selected-empty">Select an incident or operational marker.</div>
       </aside>
+    </section>
+
+    <section class="grid two">
+      <article class="card">
+        <div class="section-title"><span>Incident queue</span><span class="pill" id="incidentBadge">loading</span></div>
+        <div id="incidentList" class="feed-list"><div class="feed-row">Building incident objects...</div></div>
+      </article>
+
+      <article class="card">
+        <div class="section-title"><span>Impact Path</span><span class="pill">Palm92 signature</span></div>
+        <div id="impactPath" class="impact-empty">Select an incident to reveal the consequence chain.</div>
+      </article>
+    </section>
+
+    <section class="grid two">
+      <article class="card">
+        <div class="section-title"><span>Evidence bundle</span><span class="pill">provenance</span></div>
+        <div id="evidenceBundle" class="evidence-empty">Select an incident to inspect supporting and conflicting evidence.</div>
+      </article>
+
+      <article class="card">
+        <div class="section-title"><span>Recommended next action</span><span class="pill">human gate</span></div>
+        <div id="recommendationPanel" class="selected-empty">No incident selected.</div>
+      </article>
     </section>
 
     <section class="grid two">
@@ -91,7 +113,7 @@
       </article>
 
       <article class="card">
-        <div class="section-title">Incident intelligence</div>
+        <div class="section-title">Incident timeline</div>
         <div class="timeline" id="incidentTimeline">
           <div><b>NOW</b><span>Waiting for live feeds...</span></div>
         </div>
@@ -100,14 +122,18 @@
 
     <section class="card governance">
       <div class="section-title">Governance gate</div>
-      <p><strong>System rule:</strong> data can be collected and analysed automatically. Consequential actions remain human-controlled.</p>
-      <p class="muted">The dashboard does not silently promote uncertain data into confirmed incidents.</p>
-      <div class="actions"><button id="refreshBtn">Refresh feeds</button><button class="secondary" id="reviewBtn">Mark reviewed</button></div>
+      <p><strong>System rule:</strong> Palm92 may correlate, explain, and recommend. It does not autonomously confirm incidents or trigger consequential external actions.</p>
+      <p class="muted">Observed facts and AI inferences are labelled separately. Human approval remains mandatory for escalation.</p>
+      <div class="actions">
+        <button id="refreshBtn">Refresh feeds</button>
+        <button class="secondary" id="reviewBtn">Mark selected reviewed</button>
+        <button class="secondary" id="escalateBtn">Prepare escalation</button>
+      </div>
       <p id="reviewState" class="muted tiny"></p>
     </section>
   </main>
 
-  <footer>AI investigates. Humans decide.</footer>
+  <footer>AI investigates. Humans decide. Evidence proves why.</footer>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="app.js"></script>
 </body>

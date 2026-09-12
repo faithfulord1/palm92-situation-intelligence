@@ -12,9 +12,46 @@ Palm92 Situation Intelligence brings those signals together and turns them into 
 
 **Observe → Correlate → Explain → Assess risk → Preserve evidence → Recommend action → Human decides**
 
+## Current status
+
+**Phase 1 is now in progress with live public feeds.**
+
+Connected now:
+
+- USGS daily earthquake feed
+- Transport for London status feed
+- Open-Meteo current London weather
+- NASA FIRMS adapter scaffold with API-key detection
+
+The dashboard refreshes live data automatically every two minutes and displays source provenance and freshness.
+
+## Run locally
+
+The starter uses only Node's built-in modules.
+
+```bash
+node app/server.mjs
+```
+
+Then open:
+
+```text
+http://127.0.0.1:4173
+```
+
+## Optional NASA FIRMS setup
+
+Add a NASA FIRMS MAP_KEY as an environment variable:
+
+```bash
+NASA_FIRMS_MAP_KEY=your_key_here node app/server.mjs
+```
+
+The full FIRMS parser is the next live-data adapter task.
+
 ## MVP
 
-The first MVP focuses on five safe, high-value layers:
+The MVP focuses on five safe, high-value layers:
 
 - Earthquakes
 - Active fires
@@ -22,7 +59,7 @@ The first MVP focuses on five safe, high-value layers:
 - Public transport and rail disruption
 - Critical infrastructure context
 
-It also includes an Incident Mode for timelines, evidence provenance, confidence scoring, affected assets, and recommended next actions.
+It also includes Incident Mode for timelines, evidence provenance, confidence scoring, affected assets, and recommended next actions.
 
 ## Core principles
 
@@ -37,22 +74,15 @@ It also includes an Incident Mode for timelines, evidence provenance, confidence
 
 See [ARCHITECTURE.md](ARCHITECTURE.md), [GOVERNANCE.md](GOVERNANCE.md), and [DATA-SOURCES.md](DATA-SOURCES.md).
 
-## Run locally
-
-The starter dashboard uses only Node's built-in modules.
-
-```bash
-node app/server.mjs
-```
-
-Then open `http://127.0.0.1:4173`.
-
 ## Pinokio
 
 The repository includes a starter Pinokio launcher structure (`pinokio.js`, `pinokio.json`, `install.js`, `start.js`, `update.js`, `reset.js`).
 
-## Status
+## Next
 
-**Phase 0: foundation scaffold**
-
-Next: connect real public feeds, add evidence storage, implement incident reconstruction, then add domain packs for rail, humanitarian response, infrastructure, and governance.
+1. Complete NASA FIRMS active-fire parsing.
+2. Add a real interactive map.
+3. Add evidence objects and incident correlation.
+4. Add UK rail disruption beyond TfL.
+5. Add infrastructure dependencies.
+6. Add AI incident brief generation with human approval gates.

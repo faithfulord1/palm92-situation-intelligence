@@ -13,8 +13,11 @@
 - [x] Open-Meteo London weather
 - [x] Provenance and freshness display
 - [x] Automatic two-minute refresh
+- [x] Interactive geospatial map
+- [x] Selectable live markers
+- [x] Layer toggles
+- [x] Intelligence side panel
 - [ ] NASA FIRMS active-fire parsing
-- [ ] Interactive geospatial map
 - [ ] Wider UK rail disruption
 - [ ] Infrastructure map
 
@@ -24,6 +27,7 @@
 - Evidence provenance
 - Confidence scoring
 - Affected-asset analysis
+- Impact Path
 
 ## Phase 3 — AI copilot
 - Natural-language search

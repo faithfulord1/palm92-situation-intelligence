@@ -1,0 +1,14 @@
+{
+  "name": "palm92-situation-intelligence",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Governed geospatial incident intelligence with evidence, dependencies, Impact Path and human approval.",
+  "type": "module",
+  "scripts": {
+    "start": "node app/server.mjs",
+    "check": "node --check app/server.mjs && node --check app/public/app.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

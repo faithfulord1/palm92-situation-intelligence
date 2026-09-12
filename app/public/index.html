@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Palm92 Situation Intelligence</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,7 +14,7 @@
       <h1>Situation Intelligence</h1>
       <p>See the situation. Understand the risk. Keep humans in control.</p>
     </div>
-    <div class="status live">PHASE 1 LIVE FEEDS</div>
+    <div class="status live">PHASE 1 LIVE MAP</div>
   </header>
 
   <main>
@@ -21,7 +22,7 @@
       <div>
         <span class="kicker">LIVE OPERATIONAL PICTURE</span>
         <h2>London resilience overview</h2>
-        <p class="muted">Live public feeds are now connected for earthquakes, London transport status, and current weather. Every card shows its source and freshness.</p>
+        <p class="muted">Live public feeds now appear on an interactive geospatial layer. Click markers to inspect source, time, and context.</p>
       </div>
       <div class="score">
         <span>Risk posture</span>
@@ -37,29 +38,45 @@
       <article class="card"><span>Fire layer</span><strong id="fireState">CHECK</strong><small id="fireDetail">NASA FIRMS</small></article>
     </section>
 
-    <section class="grid two">
-      <article class="card map">
-        <div class="section-title"><span>Operational picture</span><span class="pill">live data</span></div>
-        <div class="map-canvas">
-          <div class="ring r1"></div><div class="ring r2"></div>
-          <div class="node n1">EQ</div><div class="node n2">FIRE</div><div class="node n3">RAIL</div><div class="node n4">WX</div>
-          <div class="map-label">LONDON</div>
+    <section class="grid map-layout">
+      <article class="card map-card">
+        <div class="section-title">
+          <span>Operational map</span>
+          <div class="map-actions">
+            <button class="chip active" data-layer="earthquakes">Earthquakes</button>
+            <button class="chip active" data-layer="weather">Weather</button>
+            <button class="chip active" data-layer="transport">Transport</button>
+            <button class="chip" data-layer="fires">Fires</button>
+          </div>
         </div>
-        <p class="muted tiny">Interactive mapping comes next. This panel is currently the live-feed command surface.</p>
+        <div id="map"></div>
+        <div class="map-footer">
+          <span>Base map: OpenStreetMap</span>
+          <span id="mapState">Loading layers...</span>
+        </div>
       </article>
 
-      <article class="card">
-        <div class="section-title"><span>Transport status</span><span class="pill" id="tflBadge">loading</span></div>
-        <div id="transportList" class="feed-list"><div class="feed-row">Loading TfL...</div></div>
-      </article>
+      <aside class="card intel-panel">
+        <div class="section-title"><span>Selected intelligence</span><span class="pill" id="selectedType">none</span></div>
+        <div id="selectedPanel" class="selected-empty">
+          Select an event or operational marker on the map.
+        </div>
+      </aside>
     </section>
 
     <section class="grid two">
       <article class="card">
+        <div class="section-title"><span>Transport status</span><span class="pill" id="tflBadge">loading</span></div>
+        <div id="transportList" class="feed-list"><div class="feed-row">Loading TfL...</div></div>
+      </article>
+
+      <article class="card">
         <div class="section-title"><span>Recent earthquakes</span><span class="pill">USGS</span></div>
         <div id="earthquakeList" class="feed-list"><div class="feed-row">Loading USGS...</div></div>
       </article>
+    </section>
 
+    <section class="grid two">
       <article class="card">
         <div class="section-title"><span>Evidence & provenance</span><span class="pill">auditable</span></div>
         <table>
@@ -72,27 +89,26 @@
           </tbody>
         </table>
       </article>
-    </section>
 
-    <section class="grid two">
       <article class="card">
         <div class="section-title">Incident intelligence</div>
         <div class="timeline" id="incidentTimeline">
           <div><b>NOW</b><span>Waiting for live feeds...</span></div>
         </div>
       </article>
+    </section>
 
-      <article class="card governance">
-        <div class="section-title">Governance gate</div>
-        <p><strong>System rule:</strong> data can be collected and analysed automatically. Consequential actions remain human-controlled.</p>
-        <p class="muted">The dashboard does not silently promote uncertain data into confirmed incidents.</p>
-        <div class="actions"><button id="refreshBtn">Refresh feeds</button><button class="secondary" id="reviewBtn">Mark reviewed</button></div>
-        <p id="reviewState" class="muted tiny"></p>
-      </article>
+    <section class="card governance">
+      <div class="section-title">Governance gate</div>
+      <p><strong>System rule:</strong> data can be collected and analysed automatically. Consequential actions remain human-controlled.</p>
+      <p class="muted">The dashboard does not silently promote uncertain data into confirmed incidents.</p>
+      <div class="actions"><button id="refreshBtn">Refresh feeds</button><button class="secondary" id="reviewBtn">Mark reviewed</button></div>
+      <p id="reviewState" class="muted tiny"></p>
     </section>
   </main>
 
   <footer>AI investigates. Humans decide.</footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="app.js"></script>
 </body>
 </html>

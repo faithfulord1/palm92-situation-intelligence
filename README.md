@@ -2,71 +2,110 @@
 
 **See the situation. Understand the risk. Keep humans in control.**
 
-Palm92 Situation Intelligence is a governed geospatial intelligence platform for combining public data, incident evidence, infrastructure context, AI-assisted analysis, and human approval into one explainable operational picture.
+Palm92 Situation Intelligence is a governed geospatial incident-intelligence platform that combines live public data, evidence provenance, infrastructure dependencies, deterministic correlation, a local natural-language copilot, human approval gates, and exportable incident records.
 
-## Current status
+## MVP status
 
-**Phase 1 live map is working.**
+**v1.0 MVP complete**
 
-Connected now:
+Implemented:
 
 - USGS daily earthquake feed
-- Transport for London status feed
+- Transport for London live line status
+- TfL infrastructure / stop dependencies
 - Open-Meteo current London weather
-- Interactive Leaflet + OpenStreetMap operational map
-- Selectable live markers and intelligence panel
-- Layer controls for earthquakes, weather, transport, and fires
-- Source provenance and freshness
-- NASA FIRMS adapter scaffold with API-key detection
+- NASA FIRMS live fire adapter when `NASA_FIRMS_MAP_KEY` is configured
+- Leaflet + OpenStreetMap interactive map
+- Selectable data layers
+- Incident correlation engine
+- Confidence scoring
+- Observed vs inferred evidence labels
+- Evidence bundles
+- Impact Path
+- Dependency graph
+- Human review and escalation-preparation gates
+- Local audit trail
+- Incident JSON export
+- Saved operational scenes
+- Deterministic text copilot
+- Browser voice input where supported
+- Pinokio launcher
 
-The dashboard refreshes public data automatically every two minutes.
+## Product principle
 
-## Why this exists
+**AI investigates. Humans decide. Evidence proves why.**
 
-Most real-world incidents are not short of data. They are short of coordination. Weather feeds, transport disruption, satellite observations, public reports, infrastructure maps, media evidence, and official notices often live in separate systems.
-
-Palm92 brings those signals together and turns them into an evidence-backed situation model.
-
-**Observe → Correlate → Explain → Assess risk → Preserve evidence → Recommend action → Human decides**
+Palm92 is decision support, not an autonomous authority.
 
 ## Run locally
 
-The starter uses Node's built-in modules for the server.
+Node 18+ is recommended.
+
+```bash
+npm start
+```
+
+or:
 
 ```bash
 node app/server.mjs
 ```
 
-Then open:
+Open:
 
 ```text
 http://127.0.0.1:4173
 ```
 
-Internet access is needed in the browser for the OpenStreetMap tiles and Leaflet CDN.
+## Optional NASA FIRMS
 
-## Optional NASA FIRMS setup
+Create a NASA FIRMS MAP_KEY and set:
 
 ```bash
-NASA_FIRMS_MAP_KEY=your_key_here node app/server.mjs
+NASA_FIRMS_MAP_KEY=your_key_here npm start
 ```
 
-The full FIRMS parser remains the next live-data adapter task.
+Without a key, the rest of the product remains usable and the fire layer is marked as unavailable.
 
-## Core principles
+## Example copilot commands
 
-- AI investigates. Humans decide.
-- Every material claim should be traceable to evidence.
-- Confidence must be visible, not implied.
-- Sensitive actions require human approval.
-- Public safety and privacy controls are part of the architecture, not an afterthought.
-- No covert person tracking, facial recognition, licence-plate tracking, or other individual surveillance is included in the baseline build.
+- What needs attention?
+- Explain this incident
+- What depends on this incident?
+- Show me the infrastructure
+- Focus on London
+- What is the weather?
+- Show earthquakes
 
-## Next
+The current copilot is deliberately deterministic. It does not call a remote LLM, so its behaviour remains auditable and predictable.
 
-1. Complete NASA FIRMS active-fire parsing.
-2. Add incident objects and cross-source correlation.
-3. Add wider UK rail disruption.
-4. Add infrastructure dependencies.
-5. Add Impact Path.
-6. Add AI incident brief generation with approval gates.
+## Governance
+
+The baseline deliberately excludes covert person tracking, facial recognition, licence-plate tracking, stalking, weapon-targeting workflows, and autonomous consequential actions.
+
+See:
+
+- [ARCHITECTURE.md](ARCHITECTURE.md)
+- [GOVERNANCE.md](GOVERNANCE.md)
+- [INCIDENT-SCHEMA.md](INCIDENT-SCHEMA.md)
+- [DATA-SOURCES.md](DATA-SOURCES.md)
+- [MCP-TOOLS.md](MCP-TOOLS.md)
+- [SECURITY.md](SECURITY.md)
+- [PROJECT-STATUS.md](PROJECT-STATUS.md)
+
+## Pinokio
+
+The repository includes:
+
+- `pinokio.js`
+- `pinokio.json`
+- `install.js`
+- `start.js`
+- `update.js`
+- `reset.js`
+
+This gives non-coders a local launcher path without exposing secrets in source code.
+
+## What v1.0 is not
+
+This is an MVP, not a production emergency-management system. Real deployment would still require source licensing review, service-level monitoring, role-based access control, durable server-side audit storage, security testing, privacy assessment, and operational validation with domain owners.

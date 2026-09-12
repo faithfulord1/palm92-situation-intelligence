@@ -5,7 +5,6 @@
 - Governance docs
 - Pinokio launcher
 - Demo dashboard
-- Common incident schema direction
 
 ## Phase 1 — Live public data 🚧
 - [x] USGS earthquake feed
@@ -21,13 +20,19 @@
 - [ ] Wider UK rail disruption
 - [ ] Infrastructure map
 
-## Phase 2 — Incident intelligence
-- Correlation engine
-- Incident timeline
-- Evidence provenance
-- Confidence scoring
-- Affected-asset analysis
-- Impact Path
+## Phase 2 — Incident intelligence 🚧
+- [x] Deterministic correlation engine
+- [x] Incident object model
+- [x] Incident queue
+- [x] Evidence bundle
+- [x] Confidence scoring
+- [x] Observed vs inferred labelling
+- [x] Impact Path
+- [x] Recommended next action
+- [x] Human-review / escalation preparation controls
+- [ ] Persistent audit storage
+- [ ] Conflicting-evidence detector
+- [ ] Affected infrastructure lookup
 
 ## Phase 3 — AI copilot
 - Natural-language search

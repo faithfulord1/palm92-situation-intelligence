@@ -1,16 +1,23 @@
 # Data Sources Strategy
 
-The MVP should start with public, documented, low-risk sources.
+The MVP starts with public, documented, low-risk sources.
 
-## Planned layers
+## Connected sources
+
+| Layer | Source | State | Notes |
+|---|---|---|---|
+| Earthquakes | USGS | Live | Daily GeoJSON feed, magnitude, depth, location, timestamps |
+| London transport | Transport for London Unified API | Live | Tube, Overground, DLR and Elizabeth line status |
+| Weather | Open-Meteo | Live | Current London weather and hourly precipitation probability |
+| Active fires | NASA FIRMS | Adapter scaffold | API key detection is implemented; event parsing comes next |
+
+## Planned sources
 
 | Layer | Example source class | Notes |
 |---|---|---|
-| Earthquakes | Geological agencies | Public event feeds, magnitude, depth, timestamps |
-| Active fires | Satellite fire detection | Public hotspot data with freshness metadata |
-| Weather | National meteorological services | Alerts, warnings, forecasts |
-| Rail / transport | Public transport disruption feeds | Incidents, closures, delays |
+| UK rail | Operator / public rail disruption feeds | Incidents, closures, delays |
 | Infrastructure | Open mapping / operator-published datasets | Sites, routes, dependencies |
+| Severe warnings | National meteorological services | Warning polygons and alert levels |
 
 ## Source acceptance checklist
 

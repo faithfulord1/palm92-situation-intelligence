@@ -13,72 +13,86 @@
       <h1>Situation Intelligence</h1>
       <p>See the situation. Understand the risk. Keep humans in control.</p>
     </div>
-    <div class="status">DEMO MODE</div>
+    <div class="status live">PHASE 1 LIVE FEEDS</div>
   </header>
 
   <main>
     <section class="hero card">
       <div>
-        <span class="kicker">INCIDENT PICTURE</span>
+        <span class="kicker">LIVE OPERATIONAL PICTURE</span>
         <h2>London resilience overview</h2>
-        <p class="muted">Prototype operational picture using demo data. Real feeds are added in Phase 1.</p>
+        <p class="muted">Live public feeds are now connected for earthquakes, London transport status, and current weather. Every card shows its source and freshness.</p>
       </div>
       <div class="score">
         <span>Risk posture</span>
-        <strong>WATCH</strong>
-        <small>Human review required</small>
+        <strong id="riskPosture">LOADING</strong>
+        <small>Decision support only</small>
       </div>
     </section>
 
     <section class="grid metrics">
-      <article class="card"><span>Active incidents</span><strong>4</strong><small>2 need review</small></article>
-      <article class="card"><span>Evidence items</span><strong>27</strong><small>23 verified sources</small></article>
-      <article class="card"><span>Infrastructure alerts</span><strong>3</strong><small>1 high dependency</small></article>
-      <article class="card"><span>Confidence</span><strong>82%</strong><small>mixed-source assessment</small></article>
+      <article class="card"><span>Earthquakes today</span><strong id="eqCount">...</strong><small id="eqFresh">USGS</small></article>
+      <article class="card"><span>Transport issues</span><strong id="tflCount">...</strong><small id="tflFresh">TfL</small></article>
+      <article class="card"><span>London temperature</span><strong id="weatherTemp">...</strong><small id="weatherDetail">Open-Meteo</small></article>
+      <article class="card"><span>Fire layer</span><strong id="fireState">CHECK</strong><small id="fireDetail">NASA FIRMS</small></article>
     </section>
 
     <section class="grid two">
       <article class="card map">
-        <div class="section-title"><span>Operational map</span><span class="pill">prototype</span></div>
+        <div class="section-title"><span>Operational picture</span><span class="pill">live data</span></div>
         <div class="map-canvas">
           <div class="ring r1"></div><div class="ring r2"></div>
           <div class="node n1">EQ</div><div class="node n2">FIRE</div><div class="node n3">RAIL</div><div class="node n4">WX</div>
           <div class="map-label">LONDON</div>
         </div>
+        <p class="muted tiny">Interactive mapping comes next. This panel is currently the live-feed command surface.</p>
       </article>
 
       <article class="card">
-        <div class="section-title">Incident reconstruction</div>
-        <div class="timeline">
-          <div><b>09:12</b><span>Weather warning issued</span></div>
-          <div><b>09:31</b><span>Rail disruption detected</span></div>
-          <div><b>09:44</b><span>Infrastructure dependency matched</span></div>
-          <div><b>10:02</b><span>AI brief prepared for review</span></div>
-          <div class="human"><b>10:05</b><span>Human approval pending</span></div>
-        </div>
+        <div class="section-title"><span>Transport status</span><span class="pill" id="tflBadge">loading</span></div>
+        <div id="transportList" class="feed-list"><div class="feed-row">Loading TfL...</div></div>
       </article>
     </section>
 
     <section class="grid two">
       <article class="card">
-        <div class="section-title">Evidence & provenance</div>
+        <div class="section-title"><span>Recent earthquakes</span><span class="pill">USGS</span></div>
+        <div id="earthquakeList" class="feed-list"><div class="feed-row">Loading USGS...</div></div>
+      </article>
+
+      <article class="card">
+        <div class="section-title"><span>Evidence & provenance</span><span class="pill">auditable</span></div>
         <table>
-          <tr><th>Source</th><th>Freshness</th><th>Confidence</th></tr>
-          <tr><td>Official alert feed</td><td>2 min</td><td>High</td></tr>
-          <tr><td>Transport feed</td><td>4 min</td><td>High</td></tr>
-          <tr><td>Open infrastructure data</td><td>1 day</td><td>Medium</td></tr>
+          <thead><tr><th>Source</th><th>State</th><th>Use</th></tr></thead>
+          <tbody id="sourceTable">
+            <tr><td>USGS</td><td>Loading</td><td>Earthquakes</td></tr>
+            <tr><td>TfL</td><td>Loading</td><td>Transport status</td></tr>
+            <tr><td>Open-Meteo</td><td>Loading</td><td>Current weather</td></tr>
+            <tr><td>NASA FIRMS</td><td>Checking</td><td>Active fires</td></tr>
+          </tbody>
         </table>
+      </article>
+    </section>
+
+    <section class="grid two">
+      <article class="card">
+        <div class="section-title">Incident intelligence</div>
+        <div class="timeline" id="incidentTimeline">
+          <div><b>NOW</b><span>Waiting for live feeds...</span></div>
+        </div>
       </article>
 
       <article class="card governance">
         <div class="section-title">Governance gate</div>
-        <p><strong>AI recommendation:</strong> escalate the incident for operational review.</p>
-        <p class="muted">No external action is taken until a human approves it.</p>
-        <div class="actions"><button>Approve demo</button><button class="secondary">Reject</button></div>
+        <p><strong>System rule:</strong> data can be collected and analysed automatically. Consequential actions remain human-controlled.</p>
+        <p class="muted">The dashboard does not silently promote uncertain data into confirmed incidents.</p>
+        <div class="actions"><button id="refreshBtn">Refresh feeds</button><button class="secondary" id="reviewBtn">Mark reviewed</button></div>
+        <p id="reviewState" class="muted tiny"></p>
       </article>
     </section>
   </main>
 
   <footer>AI investigates. Humans decide.</footer>
+  <script src="app.js"></script>
 </body>
 </html>

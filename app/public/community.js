@@ -32,7 +32,7 @@ function renderReports(){
 }
 function toast(message){const el=document.querySelector('#toast');el.textContent=message;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2400)}
 function showContent(title,body,linkedin=false){document.querySelector('#dialogTitle').textContent=title;document.querySelector('#dialogBody').textContent=body;document.querySelector('#linkedinCompose').href='https://www.linkedin.com/feed/';dialog.dataset.content=body;dialog.showModal()}
-function floodScript(){return `A blocked drain can look like a small problem, until heavy rain turns the road into a river.\n\nImagine residents sending a photo and location when they spot a blocked drain or rising water. AI could group repeated reports, flag possible hotspots and help local responders see where to check first.\n\nA trained person would verify the report and decide what action to take. AI can help organise the warning, but it cannot clear the drain or replace emergency services.\n\nCould this help your community prepare sooner?`}
+function floodScript(){return `A blocked drain can look like a small problem, until heavy rain turns the road into a river.\n\nImagine residents sending a short report with a nearby landmark when they spot a blocked drain or rising water. AI could group repeated reports, flag possible hotspots and help local responders see where to check first.\n\nA trained person would verify the report and decide what action to take. AI can help organise the warning, but it cannot clear the drain or replace emergency services.\n\nCould this help your community prepare sooner?`}
 function makeLinkedInDraft(){
   const count=reports.length;
   const categories=[...new Set(reports.map(r=>areaName(r.category)))];

@@ -8,7 +8,7 @@ Could AI help us spot flood danger earlier?
 
 > A blocked drain can look like a small problem, until heavy rain turns the road into a river.
 >
-> Imagine residents sending a photo and location when they spot a blocked drain or rising water. AI could group repeated reports, flag possible hotspots and help local responders see where to check first.
+> Imagine residents sending a short report with a nearby landmark when they spot a blocked drain or rising water. AI could group repeated reports, flag possible hotspots and help local responders see where to check first.
 >
 > A trained person would verify the report and decide what action to take. AI can help organise the warning, but it cannot clear the drain or replace emergency services.
 >
@@ -29,7 +29,7 @@ Could AI help us spot flood danger earlier?
 
 **AI for the community: could we spot flood danger earlier?**
 
-What if a photo of a blocked drain or rising water could help a community organise reports sooner? A carefully designed tool could group repeated reports and help responders see where to check first.
+What if a short report about a blocked drain or rising water could help a community organise concerns sooner? A carefully designed tool could group repeated reports and help responders see where to check first.
 
 A person would still need to verify the information and decide what action to take. This is a proposed pilot, not a claim that the system is already operating. Any real deployment would need local partners, privacy safeguards, and a clear route to the responsible service.
 
@@ -40,3 +40,7 @@ A person would still need to verify the information and decide what action to ta
 ## Production note
 
 Use illustrative scenes or consented community footage. Do not stage a real emergency, show identifiable residents without consent, or imply a specific council or agency has adopted the proposal.
+
+## Rendered version
+
+The caption-led 30-second, 1080 × 1920 illustrative video is provided separately as `palm92-community-pulse-flood.mp4`. It is silent and ready for an approved narration or licensed music track. Re-render the illustration from source with `python3 content/render_flood_awareness.py` (requires Python Pillow and FFmpeg).

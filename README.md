@@ -106,6 +106,12 @@ The repository includes:
 
 This gives non-coders a local launcher path without exposing secrets in source code.
 
+## Community Pulse
+
+A community reporting prototype for flood and drain concerns, road safety, waste collection, fire risks, trusted health information, and scam or fraud awareness. See [`docs/COMMUNITY-PULSE.md`](docs/COMMUNITY-PULSE.md). The prototype is local-only and does not verify incidents or contact services.
+
+Open the local prototype at `/community.html` after starting the app. Video and LinkedIn launch copy: [`content/community-pulse-flood-video.md`](content/community-pulse-flood-video.md).
+
 ## What v1.0 is not
 
 This is an MVP, not a production emergency-management system. Real deployment would still require source licensing review, service-level monitoring, role-based access control, durable server-side audit storage, security testing, privacy assessment, and operational validation with domain owners.

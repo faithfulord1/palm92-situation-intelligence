@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102b27">
+  <meta name="description" content="A human-led community reporting prototype for local safety and service issues.">
+  <title>Community Pulse | Palm92</title>
+  <link rel="stylesheet" href="community.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Palm92 Situation Intelligence home"><span class="brand-mark">P</span><span>PALM92 <small>COMMUNITY PULSE</small></span></a>
+    <span class="prototype-tag">COMMUNITY PILOT · PROTOTYPE</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">LOCAL SIGNALS. HUMAN-LED ACTION.</p>
+        <h1>Small reports can help a community see the bigger picture.</h1>
+        <p class="hero-text">Share a local issue, organise reports and prepare a clear hand-off for the people who can respond. The demo keeps reports in this browser.</p>
+        <a class="button button-light" href="#report">Report a local issue <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-art" aria-label="Illustration of a neighbourhood with community signals">
+        <div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div>
+        <div class="house house-one"><i></i></div><div class="house house-two"><i></i></div>
+        <div class="signal signal-one">!</div><div class="signal signal-two">✓</div>
+        <div class="path"></div><span class="art-label">COMMUNITY → EVIDENCE → RESPONSE</span>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="How the prototype handles reports">
+      <div><b>01</b><span>Residents report<br>what they observe</span></div>
+      <div><b>02</b><span>Assistant organises<br>and flags patterns</span></div>
+      <div><b>03</b><span>A person checks<br>before action</span></div>
+      <p>AI investigates. Humans decide.</p>
+    </section>
+
+    <section class="themes section-wrap">
+      <div class="section-heading"><div><p class="eyebrow">ONE SHARED TOOL · SIX LOCAL NEEDS</p><h2>What should your community track?</h2></div><p>Start with an issue people can describe and a responsible team who can receive the report.</p></div>
+      <div class="theme-grid" id="themeGrid"></div>
+    </section>
+
+    <section class="workspace section-wrap" id="report">
+      <div class="report-panel panel">
+        <div class="panel-heading"><div><p class="eyebrow">COMMUNITY REPORT</p><h2>What did you notice?</h2></div><span class="step-badge">01 / 02</span></div>
+        <form id="reportForm">
+          <label for="category">Issue area</label>
+          <select id="category" required></select>
+          <div class="two-col">
+            <div><label for="location">Area or landmark</label><input id="location" maxlength="120" placeholder="e.g. near the community centre" required></div>
+            <div><label for="urgency">Your view of urgency</label><select id="urgency"><option value="routine">Routine</option><option value="soon">Needs attention soon</option><option value="urgent">Urgent, but not an emergency</option></select></div>
+          </div>
+          <label for="description">What did you observe?</label>
+          <textarea id="description" rows="4" maxlength="700" placeholder="Describe what you saw. Avoid names, faces, phone numbers or other personal details." required></textarea>
+          <div class="form-foot"><span id="charCount">0 / 700</span><button class="button button-dark" type="submit">Add report <span aria-hidden="true">↗</span></button></div>
+        </form>
+        <div class="privacy-note"><span aria-hidden="true">✳</span><p><b>Privacy by design</b><br>This prototype does not ask for your name, contact details, photos or precise GPS location. Reports are saved only in this browser.</p></div>
+      </div>
+
+      <div class="triage-panel panel">
+        <div class="panel-heading"><div><p class="eyebrow">TRANSPARENT ASSIST</p><h2>Human review queue</h2></div><span class="live-dot">LOCAL DEMO</span></div>
+        <div class="queue-summary"><div><strong id="reportCount">0</strong><span>reports saved</span></div><div><strong id="areaCount">0</strong><span>issue areas</span></div><button id="exportButton" class="text-button" type="button">Export JSON ↗</button></div>
+        <div class="assistant-note"><span class="spark">✳</span><p><b>Rules-based triage preview</b><br>Shows report category and urgency selected by the person. It does not verify an incident, predict danger or contact authorities.</p></div>
+        <div class="report-list" id="reportList" aria-live="polite"></div>
+        <div class="empty-state" id="emptyState"><span>⌁</span><b>Your report queue starts here</b><p>Add a sample issue to see how the community view works.</p><button id="sampleButton" class="text-button" type="button">Load fictional examples</button></div>
+        <div class="queue-actions"><button id="clearButton" class="text-button muted" type="button">Clear local reports</button><button id="linkedinButton" class="button button-outline" type="button">Create LinkedIn draft ↗</button></div>
+      </div>
+    </section>
+
+    <section class="campaign section-wrap">
+      <div class="campaign-copy"><p class="eyebrow">FIRST COMMUNITY STORY</p><h2>Could AI help us spot flood danger earlier?</h2><p>Use community reports to show how technology might help people organise local signals, while keeping decisions with residents and responders.</p><button class="button button-dark" id="showScript" type="button">Open the 30-second video script</button></div>
+      <div class="campaign-card"><span class="play">▶</span><div><small>PALM92 COMMUNITY AI · EPISODE 01</small><b>Floods do not wait for a perfect report.</b><span>Proposed pilot · London / Nigeria</span></div><span class="card-number">01</span></div>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="/">PALM92</a><span>Community support prototype. Not an emergency service or an official council, health or safety reporting channel.</span><a href="https://github.com/faithfulord1/palm92-situation-intelligence" target="_blank" rel="noreferrer">View the project on GitHub ↗</a></footer>
+
+  <dialog id="contentDialog"><div class="dialog-head"><div><p class="eyebrow">READY TO ADAPT</p><h2 id="dialogTitle">Video script</h2></div><button id="closeDialog" class="icon-button" aria-label="Close">×</button></div><pre id="dialogBody"></pre><div class="dialog-actions"><button id="copyContent" class="button button-dark" type="button">Copy text</button><a id="linkedinCompose" class="button button-outline" target="_blank" rel="noreferrer">Open LinkedIn ↗</a></div><p class="dialog-hint">LinkedIn opens separately. Review and post it yourself.</p></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="community.js" defer></script>
+</body>
+</html>

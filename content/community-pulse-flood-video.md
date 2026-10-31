@@ -41,6 +41,8 @@ A person would still need to verify the information and decide what action to ta
 
 Use illustrative scenes or consented community footage. Do not stage a real emergency, show identifiable residents without consent, or imply a specific council or agency has adopted the proposal.
 
+Music direction for a later mix: uplifting Afrobeat-inspired instrumental at 108 BPM in G major, with warm Congolese soukous guitar accents, hand percussion, a hopeful bass groove, and no vocals competing with the captions. Use original or properly licensed music.
+
 ## Rendered version
 
 The caption-led 30-second, 1080 × 1920 illustrative video is provided separately as `palm92-community-pulse-flood.mp4`. It is silent and ready for an approved narration or licensed music track. Re-render the illustration from source with `python3 content/render_flood_awareness.py` (requires Python Pillow and FFmpeg).
